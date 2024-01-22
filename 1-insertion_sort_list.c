@@ -1,43 +1,40 @@
 #include "sort.h"
 
-/*
- * insertion_sort_list - Sorts a doubly linked list of integers using the
- *                       insertion sort algorithm.
- * @list: A pointer to a pointer to the head of the list.
- *
- * This function sorts a doubly linked list in ascending order using the
- * insertion sort algorithm. It iterates through the list, comparing each
- * element with its predecessors, and reorders them accordingly.
+/**
+ * insertion_sort_list - Organizes a doubly linked list of
+ * integers in ascending order by
+ * applying the Insertion Sort algorithm.
+ * @list: Lista that need to be printed :)
  */
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *tmp, *prev, *next;
+	listint_t *temp, *previous, *next;
 
 	if (!list || *list == NULL || (*list)->next == NULL)
 		return;
-	tmp = (*list)->next;
-	while (tmp)
+	temp = (*list)->next;
+	while (temp)
 	{
-		while (tmp->prev && tmp->n < tmp->prev->n)
+		while (temp->prev && temp->n < temp->prev->n)
 		{
-			prev = tmp->prev;
-			next = tmp->next;
-			if (prev)
-				prev->next = next;
+			previous = temp->prev;
+			next = temp->next;
+			if (previous)
+				previous->next = next;
 			if (next)
-				next->prev = prev;
-			tmp->prev = prev->prev;
-			tmp->next = prev;
-			prev->prev = tmp;
-			if (tmp->prev)
-				tmp->prev->next = tmp;
+				next->prev = previous;
+			temp->prev = previous->prev;
+			temp->next = previous;
+			previous->prev = temp;
+			if (temp->prev)
+				temp->prev->next = temp;
 			else
-				*list = tmp;
+				*list = temp;
 			if (next)
-				next->prev = prev;
+				next->prev = previous;
 			print_list((const listint_t *)*list);
 		}
-		tmp = tmp->next;
+		temp = temp->next;
 	}
 }
