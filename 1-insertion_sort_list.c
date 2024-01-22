@@ -11,41 +11,32 @@
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *previous, *new_node, *temporary;
+	listint_t *tmp, *prev, *next;
 
-	if (!list || !(*list) || !((*list)->next))
+	if (!list || *list == NULL || (*list)->next == NULL)
 		return;
-
-    /* Initialize dancers for the insertion sort dance */
-	previous = (*list);
-	current = (*list)->next;
-
-	while (current)
+	tmp = (*list)->next;
+	while (tmp)
 	{
-		new_node = current->next;
-		while (previous && current->n < previous->n)
+		while (tmp->prev && tmp->n < tmp->prev->n)
 		{
-			/* Swap positions of the current and previous dancers */
-			if (previous->prev)
-				previous->prev->next = current;
+			prev = tmp->prev;
+			next = tmp->next;
+			if (prev)
+				prev->next = next;
+			if (next)
+				next->prev = prev;
+			tmp->prev = prev->prev;
+			tmp->next = prev;
+			prev->prev = tmp;
+			if (tmp->prev)
+				tmp->prev->next = tmp;
 			else
-				*list = current;
-			if (current->next)
-				current->next->prev = previous;
-			temporary = current->next;
-			current->next = previous;
-			current->prev = previous->prev;
-			previous->next = temporary;
-			previous->prev = current;
-
-			print_list(*list); // Display the sorted list after each swap
-
-            /* Move to the next pair of dancers, flowing to the left */
-			previous = current->prev;
+				*list = tmp;
+			if (next)
+				next->prev = prev;
+			print_list((const listint_t *)*list);
 		}
-        /* Move to the next unsorted element on the right */
-		current = new_node;
-		if (current)
-			previous = current->prev;
+		tmp = tmp->next;
 	}
 }
