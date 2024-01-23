@@ -24,6 +24,23 @@ void quick_sort(int *array, size_t size)
 
 }
 
+/**
+ * swap_array - Swaps two elements in an integer array.
+ *
+ * @array: Pointer to the array containing elements to be swapped.
+ * @start: Index of the first element to be swapped.
+ * @end: Index of the second element to be swapped.
+ */
+
+
+void swap_array(int *array, int start, int end)
+{
+	int swap = array[end];
+
+	array[end] = array[start];
+	array[start] = swap;
+}
+
 
 /**
  * partition - Lomuto partition scheme for the QuickSort algorithm.
@@ -58,21 +75,4 @@ int partition(int *array, int start, int end)
 	}
 	swap_array(array, start, j);
 	return (j);
-}
-
-/**
- * swap_array - Swaps two elements in an integer array.
- *
- * @array: Pointer to the array containing elements to be swapped.
- * @start: Index of the first element to be swapped.
- * @end: Index of the second element to be swapped.
- */
-
-
-void swap_array(int *array, int start, int end)
-{
-	int swap = array[end];
-
-	array[end] = array[start];
-	array[start] = swap;
 }
