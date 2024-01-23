@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "sort.h"
 
 /**
@@ -39,7 +38,7 @@ int partition(int *array, int low, int high, size_t size)
 
 
 /**
- * sorter - Recursive function to sort an array using quicksort.
+ * sorter - Recursive function to sort an array using sorter.
  * @arr: The array to be sorted.
  * @low: The starting index.
  * @high: The ending index.
@@ -59,7 +58,7 @@ void sorter(int *arr, int low, int high, size_t arr_size)
 
 /**
  * quick_sort - Sorts an array of integers in ascending order using
- * the QuickSort algorithm.
+ * the sorter algorithm.
  *
  * @array: Pointer to the array to be sorted.
  * @size: Number of elements in the array.
@@ -69,7 +68,7 @@ void quick_sort(int *array, size_t size)
 {
 	if (array == NULL || size <= 1)
 		return;
-	quicksort(array, 0, size - 1, size);
+	sorter(array, 0, size - 1, size);
 }
 
 
