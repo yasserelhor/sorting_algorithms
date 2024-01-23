@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "sort.h"
 
-void swap_array(int *array, int start, int end);
-int partition(int *array, int start, int end);
-
 /**
  * quick_sort - Sorts an array of integers in ascending order using
  * the QuickSort algorithm.
@@ -14,7 +11,9 @@ int partition(int *array, int start, int end);
 
 void quick_sort(int *array, size_t size)
 {
-	int start = 0, int end = size - 1, int n_size;
+	int start = 0;
+	int end = size - 1;
+	int n_size;
 
 	if (start < end)
 	{
