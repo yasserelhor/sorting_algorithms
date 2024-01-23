@@ -54,20 +54,20 @@ int partition(int *array, int low, int high, size_t size)
 }
 
 /**
- * swap_array - Swaps two elements in an integer array.
- *
- * @array: Pointer to the array containing elements to be swapped.
- * @start: Index of the first element to be swapped.
- * @end: Index of the second element to be swapped.
+ * sorter - Recursive function to sort an array using quicksort.
+ * @arr: The array to be sorted.
+ * @low: The starting index.
+ * @high: The ending index.
+ * @arr_size: The size of the array.
  */
 
-
-void swap_array(int *array, int start, int end)
+void sorter(int *arr, int low, int high, size_t arr_size)
 {
-	int swap = array[end];
+	if (low < high)
+	{
+		int pivot_idx = partition(arr, low, high, arr_size);
 
-	array[end] = array[start];
-	array[start] = swap;
+		sorter(arr, low, pivot_idx - 1, arr_size);
+		sorter(arr, pivot_idx + 1, high, arr_size);
+	}
 }
-
-
