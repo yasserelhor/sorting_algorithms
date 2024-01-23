@@ -11,53 +11,46 @@
 
 void quick_sort(int *array, size_t size)
 {
-	int start = 0;
-	int end = size - 1;
-	int n_size;
-
-	if (start < end)
-	{
-		n_size = partition(array, start, end);
-		quick_sort(array, n_size);
-		quick_sort(array + n_size + 1, end - n_size);
-	}
-
+	if (array == NULL || size <= 1)
+		return;
+	quicksort(array, 0, size - 1, size);
 }
 
 
 /**
- * partition - Lomuto partition scheme for the QuickSort algorithm.
+ * partition - Partition the array using the last element as the Shift.
+ * @array: The array to be partitioned.
+ * @low: The starting index.
+ * @high: The ending index.
+ * @size: The size of the array.
  *
- * @array: Pointer to the array to be partitioned.
- * @start: Starting index of the partition.
- * @end: Ending index of the partition.
- *
- * Return: Index of the pivot after partitioning.
+ * Return: The index of the Shift after partitioning.
  */
 
-int partition(int *array, int start, int end)
+int partition(int *array, int low, int high, size_t size)
 {
-	int pivot = array[start];
-	int i = start;
-	int j = end;
+	int Shift = array[high], i = low - 1, temp;
+	int j = low;
 
-	while (i <= j)
+	while (j < high)
 	{
-		while (array[i] <= pivot)
+		if (array[j] <= Shift)
 		{
 			i++;
+			temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+			if (i != j)
+				print_array(array, size);
 		}
-
-		while (array[j] > pivot)
-		{
-			j--;
-		}
-
-		if (i < j)
-			swap_array(array, i, j);
+		j++;
 	}
-	swap_array(array, start, j);
-	return (j);
+	temp = array[i + 1];
+	array[i + 1] = array[high];
+	array[high] = temp;
+	if (i + 1 != j)
+		print_array(array, size);
+	return (i + 1);
 }
 
 /**
